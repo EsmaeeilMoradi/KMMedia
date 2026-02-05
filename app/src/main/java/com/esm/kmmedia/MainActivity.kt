@@ -12,36 +12,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.esm.kmmedia.ui.theme.KMMediaTheme
+import com.esm.media_core.ui.VideoListScreen
+import com.esm.media_core.util.AndroidMediaScanner
 
 class MainActivity : ComponentActivity() {
+
+    private val scanner by lazy { AndroidMediaScanner(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            KMMediaTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+            val videos = scanner.scanVideos()
+
+            VideoListScreen(
+                        videos = videos,
+                        onVideoClick = { video ->
+                            println("Playing: ${video.path}")
+                        }
                     )
-                }
+
             }
-        }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    KMMediaTheme {
-        Greeting("Android")
     }
 }

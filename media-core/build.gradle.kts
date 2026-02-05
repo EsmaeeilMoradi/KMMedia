@@ -2,6 +2,8 @@ import org.gradle.kotlin.dsl.invoke
 
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.kotlin.compose)
     kotlin("multiplatform")
 
 }
@@ -17,6 +19,12 @@ kotlin {
             dependencies {
 
                 implementation(libs.kotlinx.coroutines.core)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.ui)
+                implementation(libs.coil.compose)
             }
         }
         val androidMain by getting {
@@ -56,8 +64,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 
