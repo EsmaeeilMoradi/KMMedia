@@ -34,6 +34,11 @@ kotlin {
                 implementation(libs.material)
                 implementation(libs.androidx.media3.exoplayer)
                 implementation(libs.media3.ui)
+
+
+                implementation("androidx.media3:media3-exoplayer:1.5.0")
+                implementation("androidx.media3:media3-ui:1.5.0")
+                implementation("androidx.media3:media3-common:1.5.0")
             }
         }
 
